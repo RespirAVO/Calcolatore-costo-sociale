@@ -11,18 +11,14 @@ public final class LocationRecord {
         this.lon = lon;
     }
 
-    public double getLat() {
-        return lat;
-    }
-
-    public double getLon() {
-        return lon;
-    }
+    public double getLat() { return lat; }
+    public double getLon() { return lon; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o)                               return true;
         if (o == null || getClass() != o.getClass()) return false;
+        
         LocationRecord that = (LocationRecord) o;
         return Double.compare(that.lat, lat) == 0 && Double.compare(that.lon, lon) == 0;
     }
@@ -35,8 +31,8 @@ public final class LocationRecord {
     @Override
     public String toString() {
         return "LocationRecord{" +
-                "lat=" + lat +
-                ", lon=" + lon +
-                '}';
+               "lat=" + lat +
+               ", lon=" + lon +
+               '}';
     }
 }
