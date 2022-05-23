@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-
         Map<String, Double> AutomobileCosts = new HashMap<>();
         
         AutomobileCosts.put("Uncompensated crash damages",        0.01);
