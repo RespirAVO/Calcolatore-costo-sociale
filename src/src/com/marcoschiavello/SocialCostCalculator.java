@@ -31,7 +31,7 @@ public class SocialCostCalculator {
             locationIndexes[1] = Arrays.asList(line).indexOf("lon");
 
             while ((line = reader.readNext()) != null) {
-                if(line[locationIndexes[0]].length() == 0 || line[locationIndexes[1]].length() == 0)
+                if (line[locationIndexes[0]].length() == 0 || line[locationIndexes[1]].length() == 0)
                     continue;
 
                 this.totalKM += this.distanceFromPivot(new LocationRecord(Double.valueOf(line[locationIndexes[0]]), Double.valueOf(line[locationIndexes[1]])));
@@ -47,7 +47,7 @@ public class SocialCostCalculator {
         double lonDiffRadiant = (point.getLon() - this.pivot.getLon()) * Math.PI / 180;
 
         double a = Math.sin(latDiffRadiant/2) * Math.sin(latDiffRadiant/2) +
-                   Math.cos(lat1Radiant) * Math.cos(lat2Radiant) *
+                   Math.cos(lat1Radiant) * Math.cos(lat2Radiant)           *
                    Math.sin(lonDiffRadiant/2) * Math.sin(lonDiffRadiant/2);
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
@@ -57,7 +57,7 @@ public class SocialCostCalculator {
     }
 
     public double calculateCostOf(String key) {
-        if(this.costMap.keySet().contains(key)) {
+        if (this.costMap.keySet().contains(key)) {
             return this.costMap.get(key) * this.totalKM;
     
         System.out.println("Valore da calcolare non previsto nella mappa");
@@ -65,15 +65,14 @@ public class SocialCostCalculator {
     }
 
     public void printCost(String key) {
-        if(this.costMap.keySet().contains(key)) {
-            System.out.println(key + ": " + Double.valueOf((int) (this.calculateCostOf(key) * 100))/100 + " €");
-        } else {
-            System.out.println("Calcolo di cui si vuole stampare il risultato non è previsto nella mappa");
-        }
+        System.out.println(
+            (this.costMap.keySet().contains(key)) ? (key + ": " + Double.valueOf((int) (this.calculateCostOf(key) * 100))/100 + " €") :
+                                                    "Calcolo di cui si vuole stampare il risultato non è previsto nella mappa"
+        );
     }
 
     public void printCost() {
-        for(String key : this.costMap.keySet()) {
+        for (String key : this.costMap.keySet()) {
             this.printCost(key);
         }
     }
